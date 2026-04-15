@@ -26,20 +26,34 @@
       <bp-page-header class="!py-2 px-4">
         <div class="flex items-center justify-between gap-4 h-10">
           <!-- 좌: 사이드바 토글 + 브레드크럼 -->
-          <div class="flex items-center gap-3 min-w-0">
-            <bp-button variant="ghost" size="icon" aria-label="사이드바 토글" data-element="사이드바 토글">
-              <bp-icon name="panel-left" size="sm"></bp-icon>
-            </bp-button>
-            <bp-breadcrumb data-element="브레드크럼">
-              <bp-breadcrumb-list>
-                <bp-breadcrumb-item><bp-breadcrumb-link href="#">상품</bp-breadcrumb-link></bp-breadcrumb-item>
-                <bp-breadcrumb-separator></bp-breadcrumb-separator>
-                <bp-breadcrumb-item><bp-breadcrumb-link href="#">PRODUCT-LIST</bp-breadcrumb-link></bp-breadcrumb-item>
-                <bp-breadcrumb-separator></bp-breadcrumb-separator>
-                <bp-breadcrumb-item><bp-breadcrumb-page>wireframe.html</bp-breadcrumb-page></bp-breadcrumb-item>
-              </bp-breadcrumb-list>
-            </bp-breadcrumb>
-          </div>
+          <bp-section data-feature="NAV__TOP_BAR_LEFT" data-label="탑바 내비">
+            <bp-description>
+              <bp-description-element name="사이드바 토글">
+                좌측 파일 트리 패널 표시/숨김 토글. 아이콘 버튼.<br />
+                · 접힌 상태는 세션 동안 유지 (localStorage)<br />
+                · 모바일 뷰에서는 기본 접힘 상태
+              </bp-description-element>
+              <bp-description-element name="브레드크럼">
+                현재 선택된 파일의 위치 경로를 표시. 그룹 &gt; 화면 &gt; 파일명 구조.<br />
+                · 각 세그먼트 클릭 시 해당 경로로 이동<br />
+                · 마지막 세그먼트(현재 파일)는 링크 비활성
+              </bp-description-element>
+            </bp-description>
+            <div class="flex items-center gap-3 min-w-0">
+              <bp-button variant="ghost" size="icon" aria-label="사이드바 토글" data-element="사이드바 토글">
+                <bp-icon name="panel-left" size="sm"></bp-icon>
+              </bp-button>
+              <bp-breadcrumb data-element="브레드크럼">
+                <bp-breadcrumb-list>
+                  <bp-breadcrumb-item><bp-breadcrumb-link href="#">상품</bp-breadcrumb-link></bp-breadcrumb-item>
+                  <bp-breadcrumb-separator></bp-breadcrumb-separator>
+                  <bp-breadcrumb-item><bp-breadcrumb-link href="#">PRODUCT-LIST</bp-breadcrumb-link></bp-breadcrumb-item>
+                  <bp-breadcrumb-separator></bp-breadcrumb-separator>
+                  <bp-breadcrumb-item><bp-breadcrumb-page>wireframe.html</bp-breadcrumb-page></bp-breadcrumb-item>
+                </bp-breadcrumb-list>
+              </bp-breadcrumb>
+            </div>
+          </bp-section>
 
           <!-- 우: 💬 코멘트 + 버전 + 발행 + 설정 -->
           <div class="flex items-center gap-2 shrink-0">
@@ -97,9 +111,18 @@
               </bp-button>
             </bp-section>
 
-            <bp-button variant="ghost" size="icon" aria-label="프로젝트 설정" data-element="설정 아이콘">
-              <bp-icon name="settings" size="sm"></bp-icon>
-            </bp-button>
+            <bp-section data-feature="PROJECT__SETTINGS" data-label="프로젝트 설정">
+              <bp-description>
+                <bp-description-element name="설정 아이콘">
+                  프로젝트 설정 진입 버튼. 클릭 시 [설정 시트](./sheet_settings.md) 열림.<br />
+                  · 저장소 연결, 멤버 권한, 삭제 등 프로젝트 메타 관리<br />
+                  · 소유자/관리자만 일부 항목 접근 가능
+                </bp-description-element>
+              </bp-description>
+              <bp-button variant="ghost" size="icon" aria-label="프로젝트 설정" data-element="설정 아이콘">
+                <bp-icon name="settings" size="sm"></bp-icon>
+              </bp-button>
+            </bp-section>
           </div>
         </div>
       </bp-page-header>
@@ -108,19 +131,28 @@
       <!-- 본문 — bp-page-content 안에 IDE 2-col 레이아웃               -->
       <!-- ============================================================ -->
       <bp-page-content class="!p-0">
-        <div class="flex h-full" style="height: calc(100vh - 64px);">
+        <div class="flex">
 
           <!-- ── 파일 트리 (area_file-tree) ────────────────────────── -->
-          <aside class="w-60 shrink-0 border-r overflow-y-auto bg-background flex flex-col">
+          <aside class="w-60 shrink-0 border-r bg-background flex flex-col">
             <!-- 프로젝트 헤더 (사이드바 상단 고정) -->
-            <div data-element="프로젝트 헤더" class="flex items-center gap-2 p-3 border-b shrink-0">
-              <bp-button variant="ghost" size="icon" aria-label="프로젝트 목록으로">
-                <bp-icon name="arrow-left" size="sm"></bp-icon>
-              </bp-button>
-              <span class="font-semibold truncate">commerce-app</span>
-            </div>
+            <bp-section data-feature="NAV__PROJECT_HEADER" data-label="프로젝트 헤더">
+              <bp-description>
+                <bp-description-element name="프로젝트 헤더">
+                  사이드바 상단 고정 영역. 프로젝트 목록으로 돌아가는 뒤로가기 버튼 + 프로젝트명.<br />
+                  · 프로젝트명 길면 말줄임 (`truncate`)<br />
+                  · 뒤로가기 클릭 시 `/projects` 로 이동
+                </bp-description-element>
+              </bp-description>
+              <div data-element="프로젝트 헤더" class="flex items-center gap-2 p-3 border-b shrink-0">
+                <bp-button variant="ghost" size="icon" aria-label="프로젝트 목록으로">
+                  <bp-icon name="arrow-left" size="sm"></bp-icon>
+                </bp-button>
+                <span class="font-semibold truncate">commerce-app</span>
+              </div>
+            </bp-section>
 
-            <bp-section data-feature="WIREFRAME__RECOGNITION" data-label="파일 트리" class="flex-1 overflow-y-auto">
+            <bp-section data-feature="WIREFRAME__RECOGNITION" data-label="파일 트리" class="flex-1">
               <bp-description>
                 <bp-description-element name="그룹 헤더" data-hide="로딩 중">
                   1-depth 폴더 = 그룹명(한글 가능). `▾/▸` 클릭으로 접기/펼치기 토글.<br />
@@ -206,11 +238,11 @@
           </aside>
 
           <!-- ── 뷰어 (area_viewer) ──────────────────────────────────── -->
-          <main class="flex-1 flex flex-col overflow-hidden">
+          <main class="flex-1 flex flex-col min-w-0">
             <bp-section
               data-feature="WIREFRAME__RENDERING"
               data-label="뷰어"
-              class="flex-1 flex flex-col overflow-hidden"
+              class="flex flex-col"
             >
               <!--
                 상태 트리:
@@ -275,7 +307,7 @@
               </bp-description>
 
               <!-- 기본 placeholder — 파일 선택 안내 (실 서비스에선 첫 화면 자동 선택) -->
-              <div data-element="파일 선택 안내" data-hide="HTML 뷰어, MD 뷰어, 로딩 중, 로딩 실패, 빈 프로젝트" class="flex-1 flex items-center justify-center p-8" style="background: var(--muted);">
+              <div data-element="파일 선택 안내" data-hide="HTML 뷰어, MD 뷰어, 로딩 중, 로딩 실패, 빈 프로젝트" class="flex items-center justify-center p-8 py-24" style="background: var(--muted);">
                 <bp-empty class="max-w-md">
                   <bp-empty-media>
                     <bp-icon name="mouse-pointer-click" size="xl"></bp-icon>
@@ -288,7 +320,7 @@
               </div>
 
               <!-- HTML 뷰어 — *.html 선택 시 (iframe + 핀 오버레이) -->
-              <div data-show="HTML 뷰어" class="flex-1 overflow-auto p-6 relative" style="background: var(--muted);">
+              <div data-show="HTML 뷰어" class="p-6 relative" style="background: var(--muted);">
                 <div class="relative mx-auto" style="max-width: 1100px;">
                   <div data-element="와이어프레임 iframe" class="bg-background border rounded shadow-sm">
                     <div class="flex items-center justify-between p-4 border-b">
@@ -323,7 +355,7 @@
               </div>
 
               <!-- MD 뷰어 — *.md 선택 시 (마크다운 렌더) -->
-              <div data-element="MD 렌더러" data-show="MD 뷰어" class="flex-1 overflow-auto bg-background p-8">
+              <div data-element="MD 렌더러" data-show="MD 뷰어" class="bg-background p-8">
                 <div class="prose max-w-3xl mx-auto">
                   <h1>상품 목록</h1>
                   <p class="text-muted-foreground">라우트: <code>/products</code></p>
@@ -352,7 +384,7 @@
               </div>
 
               <!-- 로딩 -->
-              <div data-element="로딩 스켈레톤" data-show="로딩 중" class="flex-1 flex items-center justify-center" style="background: var(--muted);">
+              <div data-element="로딩 스켈레톤" data-show="로딩 중" class="flex items-center justify-center py-24" style="background: var(--muted);">
                 <div class="space-y-3 w-full max-w-3xl p-6">
                   <bp-skeleton class="h-12 w-full"></bp-skeleton>
                   <bp-skeleton class="h-64 w-full"></bp-skeleton>
@@ -361,7 +393,7 @@
               </div>
 
               <!-- 로딩 실패 -->
-              <div data-element="로딩 실패 안내" data-show="로딩 실패" class="flex-1 flex items-center justify-center p-8">
+              <div data-element="로딩 실패 안내" data-show="로딩 실패" class="flex items-center justify-center p-8 py-24">
                 <bp-empty class="max-w-md">
                   <bp-empty-media>
                     <bp-icon name="triangle-alert" size="xl"></bp-icon>
@@ -380,7 +412,7 @@
               </div>
 
               <!-- 빈 프로젝트 -->
-              <div data-element="빈 프로젝트 안내" data-show="빈 프로젝트" class="flex-1 flex items-center justify-center p-8">
+              <div data-element="빈 프로젝트 안내" data-show="빈 프로젝트" class="flex items-center justify-center p-8 py-24">
                 <bp-empty class="max-w-md">
                   <bp-empty-media>
                     <bp-icon name="folder-open" size="xl"></bp-icon>
